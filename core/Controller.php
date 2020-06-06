@@ -15,7 +15,6 @@ class Controller
         $this->view = new \Core\View();
 
         $this->Auth = new \Core\Auth();
-        $this->authStatus = $this->Auth->check();
     }
 
     public function getClassName()

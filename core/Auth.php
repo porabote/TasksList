@@ -17,8 +17,8 @@ class Auth
 
     static function check($data = []) {
 
-        //if(self::$user['username'] == $data['username'] && self::$user['psw'] == $data['psw']) return true;
-        return false;
+        if(isset($_SESSION['username'])) return true;
+        header("Location:/users/login/");
     }
 
     static function login($data) {

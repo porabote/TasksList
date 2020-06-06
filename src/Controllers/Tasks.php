@@ -29,6 +29,8 @@ class Tasks extends Controller
 
     public function edit()
     {
+        $this->Auth->check();
+
         $record = $this->model->get($_GET['id'])[0];
 
         if(!$_POST) {
