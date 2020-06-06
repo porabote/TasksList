@@ -1,14 +1,11 @@
 <?php
 namespace Core;
 
-class Boostrap()
+use Core\Route;
+class Bootstrap
 {
-function start() {
-    var_dump(ROOT);
-    require_once 'core/model.php';
-    require_once 'core/view.php';
-    require_once 'core/controller.php';
-    require_once 'core/route.php';
-}
+    static function start() {
+        Route::start();
+    }
 }
 ?>
