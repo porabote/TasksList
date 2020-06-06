@@ -7,6 +7,7 @@ class Pagination
     public $limit;
     public $pageNumber;
     public $orderBy;
+    public $sortType;
     public $pagesCount;
 
     function __construct($connect)
@@ -15,6 +16,8 @@ class Pagination
 
         $this->pageNumber = isset($_GET['page']) ? $_GET['page'] : 1;
         $this->orderBy = isset($_GET['order']) ? $_GET['order'] : null;
+        $this->sortType = isset($_GET['sort']) ? $_GET['sort'] : 'ASC';
+
     }
 
     function setLimit($limit)
@@ -33,7 +36,7 @@ class Pagination
 
         $query = 'SELECT * FROM ' . $tableName;
         if($this->orderBy) {
-            $query .= ' ORDER BY ' .$this->orderBy;
+            $query .= ' ORDER BY ' .$this->orderBy . ' ' . $this->sortType;
         }
         $query .= ' LIMIT ' . $currentPosition . ',' . $this->limit;
 
@@ -50,7 +53,7 @@ class Pagination
             $pages[$i]['number'] = $i;
             $pages[$i]['current'] = ($i == $this->pageNumber) ? true : false;
             $pages[$i]['url'] = '/tasks/index/?page=' . $i;
-            if($this->orderBy) $pages[$i]['url'] .= '&order=' . $this->orderBy;
+            if($this->orderBy) $pages[$i]['url'] .= '&order=' . $this->orderBy . '&sort=' . $this->sortType;
         }
         return $pages;
     }

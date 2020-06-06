@@ -29,14 +29,19 @@ class Tasks extends Controller
 
     public function edit()
     {
+        $record = $this->model->get($_GET['id'])[0];
+
         if(!$_POST) {
-            $record = $this->model->get($_GET['id']);
-            $this->view->setData(['record' => $record[0]]);
+            $this->view->setData(['record' => $record]);
             $this->view->render('Tasks/edit.php');
         } else {
-            
-            $record = $this->model->update($_POST);
-            if($record) echo 'Данные успешно сохранены';
+
+            $_POST['modified_admin'] = 0;
+            if(($record['task_body'] != $_POST['task_body']) || $record['modified_admin']) $_POST['modified_admin'] = 1;//&& $record['completed']
+
+            $isSaved = $this->model->update($_POST);
+
+            if($isSaved) echo 'Данные успешно сохранены';
             else echo 'Ошибка сохранения';
         }
 

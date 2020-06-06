@@ -31,7 +31,7 @@ class Tasks extends Model
         }
 
         $query = 'UPDATE tasks 
-        SET user_email = \'' .$data['user_email']. '\', user_name = \''  .$data['user_name'].  '\', task_body = \'' .$data['task_body']. '\', completed = \'' .$data['completed']. '\'
+        SET task_body = \'' .$data['task_body']. '\', completed = \'' .$data['completed']. '\', modified_admin = \'' .$data['modified_admin']. '\'
         WHERE id = \'' . $data['id'] . '\';';
         return $this->db->connect->query($query);
 
